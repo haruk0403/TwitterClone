@@ -1,27 +1,3 @@
-<?php
-// 設定関連を読み込む
-include_once('../config.php');
-// 便利な関数を読み込む
-include_once('../util.php');
- 
-///////////////////////////////////////
-// ツイート一覧
-///////////////////////////////////////
-$view_tweets = [
-    [
-        'user_id' => 1,
-        'user_name' => 'taro',
-        'user_nickname' => '太郎',
-        'user_image_name' => 'sample-person.jpg',
-        'tweet_body' => '今プログラミングをしています。',
-        'tweet_image_name' => null,
-        'tweet_created_at' => '2021-03-15 14:00:00',
-        'like_id' => null,
-        'like_count' => 0,
-    ],
-];
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
  
@@ -36,6 +12,13 @@ $view_tweets = [
         <form action="sign-in.php" method="post">
             <img src="<?php echo HOME_URL; ?>Views/img/logo-white.svg" alt="" class="logo-white">
             <h1>Twitterクローンにログイン</h1>
+ 
+            <?php if (isset($view_try_login_result) && $view_try_login_result === false) : ?>
+                <div class="alert alert-warning text-sm" role="alert">
+                    ログインに失敗しました。メールアドレス、パスワードが正しいかご確認ください。
+                </div>
+            <?php endif; ?>
+ 
             <input type="email" class="form-control" name="email" placeholder="メールアドレス" required autofocus>
             <input type="password" class="form-control" name="password" placeholder="パスワード" required>
             <button class="w-100 btn btn-lg" type="submit">ログイン</button>
